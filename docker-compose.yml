@@ -1,0 +1,23 @@
+version: "3"
+services:
+  api:
+    build:
+      dockerfile: .
+    restart: always
+    container_name: demo-api
+    ports:
+      - "8080:8080"
+
+  mysql:
+    image: mysql:8.0
+    restart: always
+    container_name: demo-mysql
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: demo
+    hostname: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
